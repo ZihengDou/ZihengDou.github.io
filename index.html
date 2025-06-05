@@ -45,10 +45,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .profile-img.placeholder {
             color: white;
             font-size: 48px;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .profile-img:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        #photo-input {
+            display: none;
         }
 
         h1 {
@@ -325,23 +366,30 @@
 
     <div class="container">
         <header>
-            <div class="profile-img">张</div>
+            <div class="profile-img placeholder" onclick="document.getElementById('photo-input').click()">
+                <span id="placeholder-text">窦</span>
+                <img id="profile-photo" style="display: none;" alt="个人照片">
+                <div class="upload-overlay">
+                    <span>点击上传照片</span>
+                </div>
+            </div>
+            <input type="file" id="photo-input" accept="image/*">
             <h1>窦子恒</h1>
-            <p class="subtitle">硬件开发工程师 </p>
+            <p class="subtitle">硬件开发工程师</p>
             <div class="contact-info">
-                <a href="mailto:your-email@example.com" class="contact-item">
+                <a href="mailto:dzh2029796089@163.com" class="contact-item">
                     📧 dzh2029796089@163.com
                 </a>
-                <a href="tel:+8613812345678" class="contact-item">
+                <a href="tel:+8617805605768" class="contact-item">
                     📱 17805605768
                 </a>
-          </div>
+            </div>
         </header>
 
         <section class="section">
             <h2>关于我</h2>
             <p class="about-text">
-                我是一名充满热情的前端开发工程师，专注于创建用户友好的网页应用程序。拥有3年的开发经验，精通现代前端技术栈，包括React、Vue.js和Node.js。我相信优秀的用户体验来自于对细节的关注和对用户需求的深度理解。除了技术能力，我还具备良好的团队协作精神和问题解决能力，能够在快节奏的环境中高效工作。
+                我是一名充满热情的硬件开发工程师，专注于创建高效可靠的硬件解决方案。拥有丰富的电路设计和嵌入式系统开发经验，精通模拟电路、数字电路设计以及PCB布局。我相信优秀的硬件产品来自于对技术细节的精益求精和对用户需求的深度理解。除了技术能力，我还具备良好的团队协作精神和问题解决能力，能够在快节奏的环境中高效工作。
             </p>
         </section>
 
@@ -349,20 +397,20 @@
             <h2>技能专长</h2>
             <div class="skills-grid">
                 <div class="skill-item">
-                    <h3>前端开发</h3>
-                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
+                    <h3>电路设计</h3>
+                    <p>模拟电路, 数字电路, 信号处理, 电源设计</p>
                 </div>
                 <div class="skill-item">
-                    <h3>后端技术</h3>
-                    <p>Node.js, Python, MySQL, MongoDB</p>
+                    <h3>PCB设计</h3>
+                    <p>Altium Designer, KiCad, 高速PCB, 多层板设计</p>
                 </div>
                 <div class="skill-item">
-                    <h3>设计工具</h3>
-                    <p>Figma, Adobe XD, Photoshop</p>
+                    <h3>嵌入式开发</h3>
+                    <p>STM32, Arduino, FPGA, 实时系统</p>
                 </div>
                 <div class="skill-item">
-                    <h3>开发工具</h3>
-                    <p>Git, Webpack, Docker, VS Code</p>
+                    <h3>测试工具</h3>
+                    <p>示波器, 频谱仪, 网络分析仪, 信号发生器</p>
                 </div>
             </div>
         </section>
@@ -371,51 +419,51 @@
             <h2>项目作品</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">电商网站</div>
+                    <div class="project-image">智能控制器</div>
                     <div class="project-content">
-                        <h3 class="project-title">在线购物平台</h3>
+                        <h3 class="project-title">工业自动化控制器</h3>
                         <p class="project-description">
-                            基于React和Node.js开发的全栈电商平台，包含用户注册登录、商品展示、购物车、订单管理等完整功能。采用响应式设计，支持移动端访问。
+                            基于STM32设计的工业级控制器，集成多路ADC采集、PWM输出、CAN通信等功能。具备高精度、高可靠性特点，已应用于多个生产线项目。
                         </p>
                         <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Express</span>
+                            <span class="tag">STM32</span>
+                            <span class="tag">CAN总线</span>
+                            <span class="tag">PCB设计</span>
+                            <span class="tag">工业控制</span>
                         </div>
                         <a href="#" class="btn">查看项目</a>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">管理系统</div>
+                    <div class="project-image">传感器模块</div>
                     <div class="project-content">
-                        <h3 class="project-title">企业管理系统</h3>
+                        <h3 class="project-title">无线传感器网络节点</h3>
                         <p class="project-description">
-                            为中小企业开发的一站式管理平台，包含员工管理、项目跟踪、财务报表等模块。界面简洁现代，操作流程优化，大大提升工作效率。
+                            设计开发的低功耗无线传感器节点，集成温湿度、压力、光照等多种传感器，支持LoRa长距离通信，电池续航可达2年以上。
                         </p>
                         <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Element UI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">MySQL</span>
+                            <span class="tag">LoRa</span>
+                            <span class="tag">低功耗设计</span>
+                            <span class="tag">传感器融合</span>
+                            <span class="tag">无线通信</span>
                         </div>
                         <a href="#" class="btn">查看项目</a>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">移动应用</div>
+                    <div class="project-image">电源管理</div>
                     <div class="project-content">
-                        <h3 class="project-title">生活服务App</h3>
+                        <h3 class="project-title">高效电源管理系统</h3>
                         <p class="project-description">
-                            基于React Native开发的移动应用，整合了天气查询、新闻资讯、生活缴费等常用功能。界面美观，用户体验流畅，已上架应用商店。
+                            设计的多路输出电源管理芯片，效率达95%以上，支持动态电压调节，集成过流、过压、过温保护功能，广泛应用于便携设备。
                         </p>
                         <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Redux</span>
-                            <span class="tag">API集成</span>
-                            <span class="tag">UI设计</span>
+                            <span class="tag">电源设计</span>
+                            <span class="tag">DCDC转换</span>
+                            <span class="tag">保护电路</span>
+                            <span class="tag">效率优化</span>
                         </div>
                         <a href="#" class="btn">查看项目</a>
                     </div>
@@ -424,7 +472,7 @@
         </section>
 
         <footer>
-            <p>&copy; 2025 张三. 保留所有权利.</p>
+            <p>&copy; 2025 窦子恒. 保留所有权利.</p>
             <p>感谢您的关注，期待与您的合作！</p>
         </footer>
     </div>
@@ -458,6 +506,25 @@
                 const y = e.clientY * speed;
                 shape.style.transform = `translate(${x}px, ${y}px)`;
             });
+        });
+
+        // 照片上传功能
+        document.getElementById('photo-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profileImg = document.querySelector('.profile-img');
+                    const profilePhoto = document.getElementById('profile-photo');
+                    const placeholderText = document.getElementById('placeholder-text');
+                    
+                    profilePhoto.src = e.target.result;
+                    profilePhoto.style.display = 'block';
+                    placeholderText.style.display = 'none';
+                    profileImg.classList.remove('placeholder');
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
