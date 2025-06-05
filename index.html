@@ -59,40 +59,6 @@
             border-radius: 50%;
         }
 
-        .profile-img.placeholder {
-            color: white;
-            font-size: 60px;
-            font-weight: bold;
-        }
-
-        .upload-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 16px;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .profile-img:hover .upload-overlay {
-            opacity: 1;
-        }
-
-        #photo-input {
-            display: none;
-        }
-
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
@@ -310,10 +276,6 @@
                 width: 160px;
                 height: 160px;
             }
-            
-            .profile-img.placeholder {
-                font-size: 50px;
-            }
         }
 
         .floating-shapes {
@@ -376,14 +338,12 @@
 
     <div class="container">
         <header>
-            <div class="profile-img placeholder" onclick="document.getElementById('photo-input').click()">
-                <span id="placeholder-text">窦</span>
-                <img id="profile-photo" style="display: none;" alt="个人照片">
-                <div class="upload-overlay">
-                    <span>点击上传照片</span>
-                </div>
+            <div class="profile-img">
+                <!-- 使用 dzh.jpg 作为照片文件 -->
+                <img src="dzh.jpg" alt="窦子恒的照片" onerror="this.style.display='none'; document.getElementById('placeholder-text').style.display='flex';">
+                <!-- 如果图片加载失败，显示文字占位符 -->
+                <span id="placeholder-text" style="display: none; color: white; font-size: 60px; font-weight: bold;">窦</span>
             </div>
-            <input type="file" id="photo-input" accept="image/*">
             <h1>窦子恒</h1>
             <p class="subtitle">硬件开发工程师</p>
             <div class="contact-info">
@@ -518,10 +478,18 @@
             });
         });
 
-        // 页面加载时检查是否有保存的照片
+        // 页面加载时检查是否有预设的照片
         document.addEventListener('DOMContentLoaded', function() {
-            loadSavedPhoto();
+            checkExistingPhoto();
         });
+
+        // 检查是否已经有照片
+        function checkExistingPhoto() {
+            const profilePhoto = document.getElementById('profile-photo');
+            if (profilePhoto.src && profilePhoto.src.startsWith('data:image/')) {
+                displayPhoto(profilePhoto.src);
+            }
+        }
 
         // 照片上传功能
         document.getElementById('photo-input').addEventListener('change', function(e) {
@@ -531,7 +499,7 @@
                 reader.onload = function(e) {
                     const imageData = e.target.result;
                     displayPhoto(imageData);
-                    savePhotoToPage(imageData);
+                    showBase64Code(imageData);
                 };
                 reader.readAsDataURL(file);
             }
@@ -549,113 +517,35 @@
             profileImg.classList.remove('placeholder');
         }
 
-        // 将照片保存到页面中（通过修改HTML结构实现持久化）
-        function savePhotoToPage(imageData) {
+        // 显示base64代码供用户复制
+        function showBase64Code(imageData) {
+            const codeDisplay = document.getElementById('code-display');
+            const base64Code = document.getElementById('base64-code');
+            
+            base64Code.value = imageData;
+            codeDisplay.style.display = 'block';
+            
+            // 滚动到代码显示区域
+            codeDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // 复制代码到剪贴板
+        function copyToClipboard() {
+            const base64Code = document.getElementById('base64-code');
+            base64Code.select();
+            base64Code.setSelectionRange(0, 99999); // 兼容移动设备
+            
             try {
-                // 方法1: 将图片数据直接写入img标签的src属性
-                const profilePhoto = document.getElementById('profile-photo');
-                profilePhoto.src = imageData;
-                profilePhoto.setAttribute('data-original-src', imageData);
-                
-                // 方法2: 创建隐藏的数据存储元素
-                let hiddenDataDiv = document.getElementById('photo-data-storage');
-                if (!hiddenDataDiv) {
-                    hiddenDataDiv = document.createElement('div');
-                    hiddenDataDiv.id = 'photo-data-storage';
-                    hiddenDataDiv.style.display = 'none';
-                    hiddenDataDiv.style.position = 'absolute';
-                    hiddenDataDiv.style.left = '-9999px';
-                    document.body.appendChild(hiddenDataDiv);
-                }
-                hiddenDataDiv.textContent = imageData;
-                
-                // 方法3: 使用canvas保存图片
-                createCanvasBackup(imageData);
-                
-                // 方法4: 使用meta标签存储
-                let metaTag = document.querySelector('meta[name="profile-photo"]');
-                if (!metaTag) {
-                    metaTag = document.createElement('meta');
-                    metaTag.name = 'profile-photo';
-                    document.head.appendChild(metaTag);
-                }
-                metaTag.content = imageData;
-                
-                console.log('照片已保存到页面中');
-            } catch (error) {
-                console.error('保存照片失败:', error);
+                document.execCommand('copy');
+                alert('代码已复制到剪贴板！请在HTML代码中替换img标签的src属性。');
+            } catch (err) {
+                alert('复制失败，请手动选择并复制代码。');
             }
         }
 
-        // 创建canvas备份
-        function createCanvasBackup(imageData) {
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                canvas.id = 'photo-backup-canvas';
-                canvas.style.display = 'none';
-                canvas.width = 200;
-                canvas.height = 200;
-                
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, 200, 200);
-                
-                // 移除旧的canvas
-                const oldCanvas = document.getElementById('photo-backup-canvas');
-                if (oldCanvas) {
-                    oldCanvas.remove();
-                }
-                
-                document.body.appendChild(canvas);
-            };
-            img.src = imageData;
-        }
-
-        // 加载保存的照片
-        function loadSavedPhoto() {
-            try {
-                // 尝试从多个位置恢复照片
-                let imageData = null;
-                
-                // 方法1: 从img标签的data属性加载
-                const profilePhoto = document.getElementById('profile-photo');
-                const savedSrc = profilePhoto.getAttribute('data-original-src');
-                if (savedSrc && savedSrc.startsWith('data:image/')) {
-                    imageData = savedSrc;
-                }
-                
-                // 方法2: 从隐藏的数据存储元素加载
-                if (!imageData) {
-                    const hiddenDataDiv = document.getElementById('photo-data-storage');
-                    if (hiddenDataDiv && hiddenDataDiv.textContent.startsWith('data:image/')) {
-                        imageData = hiddenDataDiv.textContent;
-                    }
-                }
-                
-                // 方法3: 从meta标签加载
-                if (!imageData) {
-                    const metaTag = document.querySelector('meta[name="profile-photo"]');
-                    if (metaTag && metaTag.content.startsWith('data:image/')) {
-                        imageData = metaTag.content;
-                    }
-                }
-                
-                // 方法4: 从canvas加载
-                if (!imageData) {
-                    const canvas = document.getElementById('photo-backup-canvas');
-                    if (canvas) {
-                        imageData = canvas.toDataURL();
-                    }
-                }
-                
-                // 如果找到了图片数据，就显示它
-                if (imageData) {
-                    displayPhoto(imageData);
-                }
-                
-            } catch (error) {
-                console.error('加载照片失败:', error);
-            }
+        // 隐藏代码显示区域
+        function hideCodeDisplay() {
+            document.getElementById('code-display').style.display = 'none';
         }
     </script>
 </body>
