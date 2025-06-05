@@ -37,8 +37,8 @@
         }
 
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             margin: 0 auto 20px;
             background: linear-gradient(45deg, #667eea, #764ba2);
@@ -61,7 +61,7 @@
 
         .profile-img.placeholder {
             color: white;
-            font-size: 48px;
+            font-size: 60px;
             font-weight: bold;
         }
 
@@ -80,8 +80,9 @@
             transition: opacity 0.3s ease;
             cursor: pointer;
             border-radius: 50%;
-            font-size: 14px;
+            font-size: 16px;
             text-align: center;
+            padding: 10px;
         }
 
         .profile-img:hover .upload-overlay {
@@ -304,6 +305,15 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .profile-img {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .profile-img.placeholder {
+                font-size: 50px;
+            }
         }
 
         .floating-shapes {
@@ -508,24 +518,145 @@
             });
         });
 
+        // 页面加载时检查是否有保存的照片
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedPhoto();
+        });
+
         // 照片上传功能
         document.getElementById('photo-input').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const profileImg = document.querySelector('.profile-img');
-                    const profilePhoto = document.getElementById('profile-photo');
-                    const placeholderText = document.getElementById('placeholder-text');
-                    
-                    profilePhoto.src = e.target.result;
-                    profilePhoto.style.display = 'block';
-                    placeholderText.style.display = 'none';
-                    profileImg.classList.remove('placeholder');
+                    const imageData = e.target.result;
+                    displayPhoto(imageData);
+                    savePhotoToPage(imageData);
                 };
                 reader.readAsDataURL(file);
             }
         });
+
+        // 显示照片的函数
+        function displayPhoto(imageData) {
+            const profileImg = document.querySelector('.profile-img');
+            const profilePhoto = document.getElementById('profile-photo');
+            const placeholderText = document.getElementById('placeholder-text');
+            
+            profilePhoto.src = imageData;
+            profilePhoto.style.display = 'block';
+            placeholderText.style.display = 'none';
+            profileImg.classList.remove('placeholder');
+        }
+
+        // 将照片保存到页面中（通过修改HTML结构实现持久化）
+        function savePhotoToPage(imageData) {
+            try {
+                // 方法1: 将图片数据直接写入img标签的src属性
+                const profilePhoto = document.getElementById('profile-photo');
+                profilePhoto.src = imageData;
+                profilePhoto.setAttribute('data-original-src', imageData);
+                
+                // 方法2: 创建隐藏的数据存储元素
+                let hiddenDataDiv = document.getElementById('photo-data-storage');
+                if (!hiddenDataDiv) {
+                    hiddenDataDiv = document.createElement('div');
+                    hiddenDataDiv.id = 'photo-data-storage';
+                    hiddenDataDiv.style.display = 'none';
+                    hiddenDataDiv.style.position = 'absolute';
+                    hiddenDataDiv.style.left = '-9999px';
+                    document.body.appendChild(hiddenDataDiv);
+                }
+                hiddenDataDiv.textContent = imageData;
+                
+                // 方法3: 使用canvas保存图片
+                createCanvasBackup(imageData);
+                
+                // 方法4: 使用meta标签存储
+                let metaTag = document.querySelector('meta[name="profile-photo"]');
+                if (!metaTag) {
+                    metaTag = document.createElement('meta');
+                    metaTag.name = 'profile-photo';
+                    document.head.appendChild(metaTag);
+                }
+                metaTag.content = imageData;
+                
+                console.log('照片已保存到页面中');
+            } catch (error) {
+                console.error('保存照片失败:', error);
+            }
+        }
+
+        // 创建canvas备份
+        function createCanvasBackup(imageData) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.id = 'photo-backup-canvas';
+                canvas.style.display = 'none';
+                canvas.width = 200;
+                canvas.height = 200;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, 200, 200);
+                
+                // 移除旧的canvas
+                const oldCanvas = document.getElementById('photo-backup-canvas');
+                if (oldCanvas) {
+                    oldCanvas.remove();
+                }
+                
+                document.body.appendChild(canvas);
+            };
+            img.src = imageData;
+        }
+
+        // 加载保存的照片
+        function loadSavedPhoto() {
+            try {
+                // 尝试从多个位置恢复照片
+                let imageData = null;
+                
+                // 方法1: 从img标签的data属性加载
+                const profilePhoto = document.getElementById('profile-photo');
+                const savedSrc = profilePhoto.getAttribute('data-original-src');
+                if (savedSrc && savedSrc.startsWith('data:image/')) {
+                    imageData = savedSrc;
+                }
+                
+                // 方法2: 从隐藏的数据存储元素加载
+                if (!imageData) {
+                    const hiddenDataDiv = document.getElementById('photo-data-storage');
+                    if (hiddenDataDiv && hiddenDataDiv.textContent.startsWith('data:image/')) {
+                        imageData = hiddenDataDiv.textContent;
+                    }
+                }
+                
+                // 方法3: 从meta标签加载
+                if (!imageData) {
+                    const metaTag = document.querySelector('meta[name="profile-photo"]');
+                    if (metaTag && metaTag.content.startsWith('data:image/')) {
+                        imageData = metaTag.content;
+                    }
+                }
+                
+                // 方法4: 从canvas加载
+                if (!imageData) {
+                    const canvas = document.getElementById('photo-backup-canvas');
+                    if (canvas) {
+                        imageData = canvas.toDataURL();
+                    }
+                }
+                
+                // 如果找到了图片数据，就显示它
+                if (imageData) {
+                    displayPhoto(imageData);
+                }
+                
+            } catch (error) {
+                console.error('加载照片失败:', error);
+            }
+        }
     </script>
 </body>
 </html>
