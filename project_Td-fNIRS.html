@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD-fNIRS瞬态超快单光子计数设备 - 窦子恒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 导航栏 */
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            color: #764ba2;
+            transform: translateX(-5px);
+        }
+
+        .nav-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* 项目头部 */
+        .project-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-main-title {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .project-tags-header {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* 主要内容区域 */
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* 项目概览 */
+        .project-overview {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        /* 图片画廊 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .image-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px 15px 15px;
+            font-size: 0.9em;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+
+        .image-item:hover .image-caption {
+            transform: translateY(0);
+        }
+
+        /* 占位图片样式 */
+        .placeholder-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 技术详情 */
+        .tech-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+            transform: translateY(-3px);
+        }
+
+        .tech-item h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .tech-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* 特色功能列表 */
+        .feature-list {
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            display: block;
+            margin: 15px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-left: 4px solid transparent;
+            border-image: linear-gradient(45deg, #667eea, #764ba2) 1;
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-item:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+            transform: translateX(8px);
+        }
+
+        .feature-item strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* 项目统计 */
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: perspective(1000px) rotateX(10deg) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .nav {
+                padding: 12px 20px;
+            }
+
+            .project-header,
+            .content-section {
+                padding: 25px;
+            }
+
+            .project-main-title {
+                font-size: 2em;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-details,
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item:hover {
+                transform: translateX(5px);
+            }
+        }
+
+        /* 浮动形状动画 */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* 图片模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="nav">
+            <a href="index.html" class="nav-back">
+                ← 返回主页
+            </a>
+            <div class="nav-title">项目详情</div>
+        </nav>
+
+        <!-- 项目头部 -->
+        <div class="project-header">
+            <h1 class="project-main-title">TD-fNIRS瞬态超快单光子计数设备</h1>
+            <p class="project-subtitle">基于dToF的时域近红外光学脑成像系统</p>
+            <div class="project-tags-header">
+                <span class="tag">皮秒脉冲</span>
+                <span class="tag">近红外</span>
+                <span class="tag">高速电路</span>
+                <span class="tag">dToF</span>
+                <span class="tag">FPGA</span>
+                <span class="tag">单光子计数</span>
+            </div>
+        </div>
+
+        <!-- 项目概览 -->
+        <div class="content-section">
+            <h2 class="section-title">项目概览</h2>
+            <p class="project-overview">
+                本项目致力于开发基于直接时间飞行（dToF）技术的时域近红外光学脑成像系统，通过精确测量皮秒级光子在脑组织中的传输时间，实现对大脑皮层神经活动的高精度成像。该系统采用先进的单光子计数技术和超快电路设计，在时间分辨率和空间分辨率方面均达到了国际领先水平，为神经科学研究和临床诊断提供了强有力的技术支持。
+            </p>
+        </div>
+
+        <!-- 项目统计 -->
+        <div class="content-section">
+            <h2 class="section-title">项目数据</h2>
+            <div class="project-stats">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">通道数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200M</div>
+                    <div class="stat-label">采样点/秒</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><150</div>
+                    <div class="stat-label">脉宽（ps）</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">60万</div>
+                    <div class="stat-label">投资金额（元）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术特色 -->
+        <div class="content-section">
+            <h2 class="section-title">技术特色</h2>
+            <div class="feature-list">
+                <span class="feature-item">
+                    <strong>超快脉冲源设计：</strong>基于阶跃恢复二极管（SRD）的高速开关特性，成功设计并实现了脉宽小于150ps的瞬态近红外脉冲光源，为时域成像提供了高质量的激励信号。
+                </span>
+                <span class="feature-item">
+                    <strong>高速信号读出：</strong>采用LMH3401差分放大器和MAX40026高速比较器的组合方案，实现了边沿时间小于350ps的超快SiPM信号读出电路，相位抖动控制在100ps以内。
+                </span>
+                <span class="feature-item">
+                    <strong>精密时间测量：</strong>基于TDC-GPX2型时间-数字转换器设计的测量系统，仪器响应函数（IRF）宽度小于50ps，在时间精度方面领先于国际同类TD-fNIRS设备。
+                </span>
+                <span class="feature-item">
+                    <strong>高性能数据处理：</strong>使用ZYNQ XC7Z020 FPGA搭建SOC系统，自主设计TCSPC信号传输IP核和DDR3高速信号传输逻辑，实现实时数据处理。
+                </span>
+                <span class="feature-item">
+                    <strong>多通道并行测量：</strong>系统支持12通道并行工作，单通道采样率达到2亿采样点/秒，可实时测量光子飞行时间，满足高密度脑成像需求。
+                </span>
+            </div>
+        </div>
+
+        <!-- 技术架构 -->
+        <div class="content-section">
+            <h2 class="section-title">技术架构</h2>
+            <div class="tech-details">
+                <div class="tech-item">
+                    <h3>光源模块</h3>
+                    <p>采用阶跃恢复二极管（SRD）技术，产生高质量皮秒脉冲，结合近红外激光器实现稳定可控的光学激励源。脉冲上升时间优化至150ps以内，为后续时域测量奠定基础。</p>
+                </div>
+                <div class="tech-item">
+                    <h3>探测模块</h3>
+                    <p>使用硅光电倍增管（SiPM）作为单光子探测器，配合精心设计的前置放大和信号调理电路，实现高灵敏度、低噪声的光子信号检测。</p>
+                </div>
+                <div class="tech-item">
+                    <h3>时间测量</h3>
+                    <p>核心采用TDC-GPX2时间数字转换器，配合高精度时钟和触发电路，实现皮秒级时间分辨率的飞行时间测量，为精确重建光子传输路径提供数据支持。</p>
+                </div>
+                <div class="tech-item">
+                    <h3>数据处理</h3>
+                    <p>基于ZYNQ异构处理平台，ARM处理器负责系统控制和数据管理，FPGA实现高速数据采集和预处理，确保系统的实时性和可靠性。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图片展示 -->
+        <div class="content-section">
+            <h2 class="section-title">项目展示</h2>
+            <div class="image-gallery">
+                <div class="image-item" onclick="openModal('system-overview.jpg')">
+                    <div class="placeholder-image">
+                        系统整体架构图
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">TD-fNIRS系统整体架构与信号流程</div>
+                </div>
+                <div class="image-item" onclick="openModal('pulse-circuit.jpg')">
+                    <div class="placeholder-image">
+                        皮秒脉冲电路设计
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">基于SRD的皮秒脉冲产生电路</div>
+                </div>
+                <div class="image-item" onclick="openModal('readout-circuit.jpg')">
+                    <div class="placeholder-image">
+                        高速信号读出电路
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">SiPM信号调理与高速读出电路</div>
+                </div>
+                <div class="image-item" onclick="openModal('fpga-board.jpg')">
+                    <div class="placeholder-image">
+                        FPGA核心板设计
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">ZYNQ XC7Z020核心板与接口设计</div>
+                </div>
+                <div class="image-item" onclick="openModal('measurement-results.jpg')">
+                    <div class="placeholder-image">
+                        测量结果展示
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">系统性能测试与脑成像实验结果</div>
+                </div>
+                <div class="image-item" onclick="openModal('prototype.jpg')">
+                    <div class="placeholder-image">
+                        原型机实物
+                        <br><small>点击上传图片</small>
+                    </div>
+                    <div class="image-caption">12通道TD-fNIRS系统原型机</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目成果 -->
+        <div class="content-section">
+            <h2 class="section-title">项目成果</h2>
+            <div class="feature-list">
+                <span class="feature-item">
+                    <strong>技术突破：</strong>成功研发出仪器响应函数宽度小于50ps的TD-fNIRS系统，在时间分辨率方面达到国际领先水平。
+                </span>
+                <span class="feature-item">
+                    <strong>产业化进展：</strong>获得台深创（深圳）科技投资公司60万元投资，推动技术向产业化转化。
+                </span>
+                <span class="feature-item">
+                    <strong>性能指标：</strong>实现12通道并行测量，单通道采样率达到2亿采样点/秒，满足实时脑成像需求。
+                </span>
+                <span class="feature-item">
+                    <strong>应用前景：</strong>为神经科学研究、脑功能成像和临床神经诊断提供了强有力的技术支持。
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片模态框 -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // 图片模态框功能
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        // 关闭模态框
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // 页面滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.content-section').forEach((section) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+
+        // 鼠标跟随效果
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.02;
+                const x = e.clientX * speed;
+                const y = e.clientY * speed;
+                shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
