@@ -192,7 +192,7 @@
             transform: translateY(0);
         }
 
-        /* 占位图片样式 */
+        /* 占位图片样式 - 修改为始终显示 */
         .placeholder-image {
             width: 100%;
             height: 250px;
@@ -204,6 +204,7 @@
             font-size: 1.1em;
             text-align: center;
             padding: 20px;
+            position: relative;
         }
 
         /* 技术详情 */
@@ -544,55 +545,67 @@
             </div>
         </div>
 
-        <!-- 图片展示 -->
+        <!-- 图片展示 - 修改为统一使用占位符显示 -->
         <div class="content-section">
             <h2 class="section-title">项目展示</h2>
             <div class="image-gallery">
                 <div class="image-item" onclick="openModal('images/system-framework.png')">
-                    <img src="images/system-framework.png" alt="系统整体架构图" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        系统整体架构图
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">📋</div>
+                            <div>系统整体架构图</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">TD-fNIRS系统架构与信号流程</div>
+                        </div>
                     </div>
                     <div class="image-caption">TD-fNIRS系统整体架构与信号流程</div>
                 </div>
                 <div class="image-item" onclick="openModal('images/fnirs-circuit-front.png')">
-                    <img src="images/pulse-circuit.jpg" alt="信号处理、TDC与FPGA电路设计" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        信号处理、TDC与FPGA电路设计
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">🔧</div>
+                            <div>信号处理电路</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">TDC与FPGA电路设计</div>
+                        </div>
                     </div>
                     <div class="image-caption">信号处理、TDC与FPGA电路设计</div>
                 </div>
                 <div class="image-item" onclick="openModal('images/modules.png')">
-                    <img src="images/readout-circuit.jpg" alt="各模块电路" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        各模块电路
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">🔌</div>
+                            <div>各模块电路</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">电源、脉冲源、SiPM读出</div>
+                        </div>
                     </div>
                     <div class="image-caption">电源管理、皮秒脉冲发生源、光源、SiPM读出电路</div>
                 </div>
                 <div class="image-item" onclick="openModal('images/picosecond-pulse-laser.png')">
-                    <img src="images/fpga-board.jpg" alt="皮秒脉冲光源模块" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        皮秒脉冲光源模块
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">⚡</div>
+                            <div>皮秒脉冲光源</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">光源与单光子探测模块</div>
+                        </div>
                     </div>
                     <div class="image-caption">皮秒脉冲光源模块与SiPM单光子探测模块</div>
                 </div>
                 <div class="image-item" onclick="openModal('images/test.png')">
-                    <img src="images/measurement-results.jpg" alt="测量结果展示" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        测量结果展示
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">📊</div>
+                            <div>测量结果展示</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">系统性能测试数据</div>
+                        </div>
                     </div>
                     <div class="image-caption">系统性能测试与实验结果</div>
                 </div>
                 <div class="image-item" onclick="openModal('images/12通道设备1.jpg')">
-                    <img src="images/12通道设备1.jpg" alt="原型机实物" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder-image" style="display: none;">
-                        原型机实物
-                        <br><small>图片加载失败，请检查路径</small>
+                    <div class="placeholder-image">
+                        <div>
+                            <div style="font-size: 1.2em; margin-bottom: 10px;">🏭</div>
+                            <div>12通道设备原型机</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整系统实物展示</div>
+                        </div>
                     </div>
                     <div class="image-caption">12通道TD-fNIRS系统原型机</div>
                 </div>
