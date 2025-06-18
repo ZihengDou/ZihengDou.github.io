@@ -549,29 +549,56 @@
         <div class="content-section">
             <h2 class="section-title">项目展示</h2>
             <div class="image-gallery">
+                <!-- 第1部分：系统整体架构图 - 保持一张 -->
                 <div class="image-item" onclick="openModal('images/system-framework.png')">
                     <img src="images/system-framework.png" alt="系统整体架构图" onerror="showPlaceholder(this, '📋', '系统整体架构图', 'TD-fNIRS系统架构与信号流程')">
                     <div class="image-caption">TD-fNIRS系统整体架构与信号流程</div>
                 </div>
+                
+                <!-- 第2部分：信号处理电路 - 改为两张 -->
                 <div class="image-item" onclick="openModal('images/fnirs-circuit-front.png')">
-                    <img src="images/fnirs-circuit-front.png" alt="信号处理电路" onerror="showPlaceholder(this, '🔧', '信号处理电路', 'TDC与FPGA电路设计')">
-                    <div class="image-caption">信号处理、TDC与FPGA电路设计</div>
+                    <img src="images/fnirs-circuit-front.png" alt="信号处理电路正面" onerror="showPlaceholder(this, '🔧', '信号处理电路正面', 'TDC与FPGA电路正面设计')">
+                    <div class="image-caption">信号处理电路正面 - TDC与FPGA电路设计</div>
                 </div>
+                <div class="image-item" onclick="openModal('images/fnirs-circuit-back.png')">
+                    <img src="images/fnirs-circuit-back.png" alt="信号处理电路背面" onerror="showPlaceholder(this, '🔧', '信号处理电路背面', '电路布局与走线设计')">
+                    <div class="image-caption">信号处理电路背面 - 电路布局与走线设计</div>
+                </div>
+                
+                <!-- 第3部分：各模块电路 - 保持一张 -->
                 <div class="image-item" onclick="openModal('images/modules.png')">
                     <img src="images/modules.png" alt="各模块电路" onerror="showPlaceholder(this, '🔌', '各模块电路', '电源、脉冲源、SiPM读出')">
                     <div class="image-caption">电源管理、皮秒脉冲发生源、光源、SiPM读出电路</div>
                 </div>
+                
+                <!-- 第4部分：皮秒脉冲光源 - 改为两张 -->
                 <div class="image-item" onclick="openModal('images/picosecond-pulse-laser.png')">
-                    <img src="images/picosecond-pulse-laser.png" alt="皮秒脉冲光源" onerror="showPlaceholder(this, '⚡', '皮秒脉冲光源', '光源与单光子探测模块')">
-                    <div class="image-caption">皮秒脉冲光源模块与SiPM单光子探测模块</div>
+                    <img src="images/picosecond-pulse-laser.png" alt="皮秒脉冲光源" onerror="showPlaceholder(this, '⚡', '皮秒脉冲光源', '脉冲激光器模块')">
+                    <div class="image-caption">皮秒脉冲光源模块</div>
                 </div>
+                <div class="image-item" onclick="openModal('images/picosecond-pulse-detector.png')">
+                    <img src="images/picosecond-pulse-detector.png" alt="单光子探测器" onerror="showPlaceholder(this, '🔬', '单光子探测器', 'SiPM探测器模块')">
+                    <div class="image-caption">SiPM单光子探测模块</div>
+                </div>
+                
+                <!-- 第5部分：测量结果展示 - 改为两张 -->
                 <div class="image-item" onclick="openModal('images/test.png')">
-                    <img src="images/test.png" alt="测量结果展示" onerror="showPlaceholder(this, '📊', '测量结果展示', '系统性能测试数据')">
-                    <div class="image-caption">系统性能测试与实验结果</div>
+                    <img src="images/test.png" alt="系统性能测试" onerror="showPlaceholder(this, '📊', '系统性能测试', '性能指标测试数据')">
+                    <div class="image-caption">系统性能测试与仪器响应函数</div>
                 </div>
+                <div class="image-item" onclick="openModal('images/test-results.png')">
+                    <img src="images/test-results.png" alt="实验测量结果" onerror="showPlaceholder(this, '📈', '实验测量结果', '脑成像实验数据')">
+                    <div class="image-caption">脑成像实验结果与数据分析</div>
+                </div>
+                
+                <!-- 第6部分：12通道设备原型机 - 改为两张 -->
                 <div class="image-item" onclick="openModal('images/12通道设备1.jpg')">
-                    <img src="images/12通道设备1.jpg" alt="12通道设备原型机" onerror="showPlaceholder(this, '🏭', '12通道设备原型机', '完整系统实物展示')">
-                    <div class="image-caption">12通道TD-fNIRS系统原型机</div>
+                    <img src="images/12通道设备1.jpg" alt="12通道设备正面" onerror="showPlaceholder(this, '🏭', '12通道设备正面', '设备正面外观')">
+                    <div class="image-caption">12通道TD-fNIRS系统原型机 - 正面</div>
+                </div>
+                <div class="image-item" onclick="openModal('images/12通道设备2.jpg')">
+                    <img src="images/12通道设备2.jpg" alt="12通道设备侧面" onerror="showPlaceholder(this, '🏭', '12通道设备侧面', '设备内部结构')">
+                    <div class="image-caption">12通道TD-fNIRS系统原型机 - 内部结构</div>
                 </div>
             </div>
         </div>
