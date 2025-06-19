@@ -142,40 +142,55 @@
             text-align: justify;
         }
 
-        /* 图片画廊 */
-        .image-gallery {
+        /* 图片和视频画廊 */
+        .image-gallery,
+        .media-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
             margin: 30px 0;
         }
 
-        .image-item {
+        .image-item,
+        .media-item {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            aspect-ratio: 16/10;
         }
 
-        .image-item:hover {
+        .image-item:hover,
+        .media-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
 
-        .image-item img {
+        .image-item img,
+        .media-item img {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
             transition: all 0.3s ease;
         }
 
-        .image-item:hover img {
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .image-item:hover img,
+        .media-item:hover img,
+        .media-item:hover video {
             transform: scale(1.05);
         }
 
-        .image-caption {
+        .image-caption,
+        .media-caption {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -188,14 +203,62 @@
             transition: all 0.3s ease;
         }
 
-        .image-item:hover .image-caption {
+        .image-item:hover .image-caption,
+        .media-item:hover .media-caption {
             transform: translateY(0);
         }
 
-        /* 占位图片样式 */
-        .placeholder-image {
+        /* 媒体类型标识 */
+        .media-type-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        .media-type-badge.video {
+            background: rgba(220, 53, 69, 0.9);
+        }
+
+        /* 播放按钮覆盖层 */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .play-icon {
+            font-size: 20px;
+            color: #667eea;
+            margin-left: 4px;
+        }
+
+        .media-item:hover .play-overlay {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        /* 占位图片/媒体样式 */
+        .placeholder-image,
+        .placeholder-media {
             width: 100%;
-            height: 250px;
+            height: 100%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
@@ -318,7 +381,8 @@
                 font-size: 2em;
             }
 
-            .image-gallery {
+            .image-gallery,
+            .media-gallery {
                 grid-template-columns: 1fr;
             }
 
@@ -383,7 +447,7 @@
             }
         }
 
-        /* 图片模态框 */
+        /* 图片/视频模态框 */
         .modal {
             display: none;
             position: fixed;
@@ -405,10 +469,13 @@
             max-height: 90%;
         }
 
-        .modal-content img {
+        .modal-content img,
+        .modal-content video {
             width: 100%;
             height: auto;
             border-radius: 10px;
+            max-height: 90vh;
+            object-fit: contain;
         }
 
         .close {
@@ -420,6 +487,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s ease;
+            z-index: 1001;
         }
 
         .close:hover {
@@ -555,26 +623,7 @@
                     </div>
                     <div class="media-caption">智能车完整演示视频</div>
                 </div>
-
-                <!-- 充电过程视频 -->
-                <div class="media-item" onclick="openModal('videos/charging-process.mp4', 'video')">
-                    <div class="media-type-badge video">视频</div>
-                    <video muted loop>
-                        <source src="videos/charging-process.mp4" type="video/mp4">
-                        <div class="placeholder-media">
-                            <div>
-                                <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
-                                <div>无线充电演示</div>
-                                <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">5秒快速充电过程</div>
-                            </div>
-                        </div>
-                    </video>
-                    <div class="play-overlay">
-                        <div class="play-icon">▶</div>
-                    </div>
-                    <div class="media-caption">无线充电过程演示</div>
-                </div>
-
+                
                 <!-- 智能车整体外观 -->
                 <div class="media-item" onclick="openModal('images/car.jpg', 'image')">
                     <div class="media-type-badge">图片</div>
@@ -618,10 +667,10 @@
                 </div>
                 
                 <!-- 赛道测试视频 -->
-                <div class="media-item" onclick="openModal('videos/track-testing.mp4', 'video')">
+                <div class="media-item" onclick="openModal('images/run.mp4', 'video')">
                     <div class="media-type-badge video">视频</div>
                     <video muted loop>
-                        <source src="videos/track-testing.mp4" type="video/mp4">
+                        <source src="images/run.mp4" type="video/mp4">
                         <div class="placeholder-media">
                             <div>
                                 <div style="font-size: 3em; margin-bottom: 10px;">🏁</div>
@@ -665,6 +714,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- 工作原理 -->
         <div class="content-section">
             <h2 class="section-title">工作原理</h2>
@@ -707,32 +757,57 @@
         </div>
     </div>
 
-    <!-- 图片模态框 -->
-    <div id="imageModal" class="modal">
+    <!-- 图片/视频模态框 -->
+    <div id="mediaModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="">
+        <div class="modal-content" id="modalContent">
+            <!-- 动态插入图片或视频 -->
         </div>
     </div>
 
     <script>
-        // 图片模态框功能
-        function openModal(imageSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
+        // 图片/视频模态框功能
+        function openModal(mediaSrc, mediaType) {
+            const modal = document.getElementById('mediaModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // 清空之前的内容
+            modalContent.innerHTML = '';
+            
+            if (mediaType === 'video') {
+                const video = document.createElement('video');
+                video.src = mediaSrc;
+                video.controls = true;
+                video.autoplay = true;
+                modalContent.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = mediaSrc;
+                img.alt = '项目图片';
+                modalContent.appendChild(img);
+            }
+            
             modal.style.display = 'block';
-            modalImg.src = imageSrc;
         }
 
         // 关闭模态框
         document.querySelector('.close').onclick = function() {
-            document.getElementById('imageModal').style.display = 'none';
+            const modal = document.getElementById('mediaModal');
+            const video = modal.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+            modal.style.display = 'none';
         }
 
         // 点击模态框外部关闭
         window.onclick = function(event) {
-            const modal = document.getElementById('imageModal');
+            const modal = document.getElementById('mediaModal');
             if (event.target == modal) {
+                const video = modal.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
                 modal.style.display = 'none';
             }
         }
@@ -764,6 +839,23 @@
                 const x = e.clientX * speed;
                 const y = e.clientY * speed;
                 shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // 为视频添加hover播放预览
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoItems = document.querySelectorAll('.media-item video');
+            videoItems.forEach(video => {
+                const parent = video.closest('.media-item');
+                
+                parent.addEventListener('mouseenter', () => {
+                    video.play().catch(e => console.log('Video play failed:', e));
+                });
+                
+                parent.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
             });
         });
     </script>
