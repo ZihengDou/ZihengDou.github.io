@@ -533,72 +533,138 @@
             </div>
         </div>
 
-        <!-- 图片展示 -->
+        <!-- 项目展示 - 支持图片和视频 -->
         <div class="content-section">
             <h2 class="section-title">项目展示</h2>
-            <div class="image-gallery">
-                <div class="image-item" onclick="openModal('images/car.jpg')">
-                    <div class="placeholder-image">
+            <div class="media-gallery">
+                <!-- 智能车演示视频 -->
+                <div class="media-item" onclick="openModal('videos/run.mp4', 'video')">
+                    <div class="media-type-badge video">视频</div>
+                    <video muted loop>
+                        <source src="videos/car-demo.mp4" type="video/mp4">
+                        <div class="placeholder-media">
+                            <div>
+                                <div style="font-size: 3em; margin-bottom: 10px;">🎬</div>
+                                <div>智能车演示视频</div>
+                                <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整的充电定位演示</div>
+                            </div>
+                        </div>
+                    </video>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="media-caption">智能车完整演示视频</div>
+                </div>
+
+                <!-- 充电过程视频 -->
+                <div class="media-item" onclick="openModal('videos/charging-process.mp4', 'video')">
+                    <div class="media-type-badge video">视频</div>
+                    <video muted loop>
+                        <source src="videos/charging-process.mp4" type="video/mp4">
+                        <div class="placeholder-media">
+                            <div>
+                                <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
+                                <div>无线充电演示</div>
+                                <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">5秒快速充电过程</div>
+                            </div>
+                        </div>
+                    </video>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="media-caption">无线充电过程演示</div>
+                </div>
+
+                <!-- 智能车整体外观 -->
+                <div class="media-item" onclick="openModal('images/car.jpg', 'image')">
+                    <div class="media-type-badge">图片</div>
+                    <img src="images/car.jpg" alt="智能车整体外观" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-media" style="display: none;">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🏎️</div>
                             <div>智能车整体外观</div>
                             <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整的无线充电智能车系统</div>
                         </div>
                     </div>
+                    <div class="media-caption">智能车整体外观展示</div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/main-board.jpg')">
-                    <div class="placeholder-image">
+                <!-- 主控电路板正面 -->
+                <div class="media-item" onclick="openModal('images/main-board.jpg', 'image')">
+                    <div class="media-type-badge">图片</div>
+                    <img src="images/main-board.jpg" alt="主控电路板" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-media" style="display: none;">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🔧</div>
                             <div>主控电路板</div>
                             <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">基于TC264的核心控制系统</div>
                         </div>
                     </div>
+                    <div class="media-caption">主控电路板正面</div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/main-board-back.jpg')">
-                    <div class="placeholder-image">
-                        <div>
-                            <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
-                            <div>主控电路板</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">背面</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="image-item" onclick="openModal('images/anhui.jpg')">
-                    <div class="placeholder-image">
+                <!-- 主控电路板背面 -->
+                <div class="media-item" onclick="openModal('images/main-board-back.jpg', 'image')">
+                    <div class="media-type-badge">图片</div>
+                    <img src="images/main-board-back.jpg" alt="主控电路板背面" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-media" style="display: none;">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">⚙️</div>
+                            <div>主控电路板背面</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">精密的电路布局设计</div>
+                        </div>
+                    </div>
+                    <div class="media-caption">主控电路板背面</div>
+                </div>
+                
+                <!-- 赛道测试视频 -->
+                <div class="media-item" onclick="openModal('videos/track-testing.mp4', 'video')">
+                    <div class="media-type-badge video">视频</div>
+                    <video muted loop>
+                        <source src="videos/track-testing.mp4" type="video/mp4">
+                        <div class="placeholder-media">
+                            <div>
+                                <div style="font-size: 3em; margin-bottom: 10px;">🏁</div>
+                                <div>赛道测试视频</div>
+                                <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">实际比赛场景测试</div>
+                            </div>
+                        </div>
+                    </video>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="media-caption">赛道实际测试场景</div>
+                </div>
+
+                <!-- 安徽省赛区证书 -->
+                <div class="media-item" onclick="openModal('images/anhui.jpg', 'image')">
+                    <div class="media-type-badge">图片</div>
+                    <img src="images/anhui.jpg" alt="安徽省赛区证书" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-media" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">🏆</div>
                             <div>安徽省赛区证书</div>
                             <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">安徽省赛区一等奖</div>
                         </div>
                     </div>
+                    <div class="media-caption">安徽省赛区一等奖证书</div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/national.jpg')">
-                    <div class="placeholder-image">
+                <!-- 全国总决赛证书 -->
+                <div class="media-item" onclick="openModal('images/national.jpg', 'image')">
+                    <div class="media-type-badge">图片</div>
+                    <img src="images/national.jpg" alt="全国总决赛证书" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-media" style="display: none;">
                         <div>
-                            <div style="font-size: 3em; margin-bottom: 10px;">🔋</div>
-                            <div>全国总决赛</div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">🥇</div>
+                            <div>全国总决赛证书</div>
                             <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">全国总决赛一等奖</div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="image-item" onclick="openModal('images/track-testing.jpg')">
-                    <div class="placeholder-image">
-                        <div>
-                            <div style="font-size: 3em; margin-bottom: 10px;">🏁</div>
-                            <div>赛道测试</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">实际赛道充电测试场景</div>
-                        </div>
-                    </div>
+                    <div class="media-caption">全国总决赛一等奖证书</div>
                 </div>
             </div>
         </div>
-
         <!-- 工作原理 -->
         <div class="content-section">
             <h2 class="section-title">工作原理</h2>
