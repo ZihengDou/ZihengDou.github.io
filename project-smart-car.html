@@ -528,30 +528,8 @@
         <div class="content-section">
             <h2 class="section-title">项目概览</h2>
             <p class="project-overview">
-                全国大学生智能汽车竞赛无线充电组项目是一个集成了无线充电技术、电机控制和智能导航的综合性系统。车模需要在赛道中自主导航，实时检测并定位无线充电发射装置，通过精确控制停靠在充电位置上进行能量补充。整个系统采用英飞凌TC264单片机作为主控芯片，集成了无线充电接收电路、电机驱动系统、电磁检测模块等多个子系统，实现了高效的能量传输和精确的运动控制。
+               本项目是一个集成了无线充电技术、电机控制和智能导航的综合性系统。车模需要在赛道中使用摄像头自主导航，实时检测并定位无线充电发射装置，通过精确控制停靠在充电位置上进行电量补充。整个系统采用英飞凌TC264单片机作为主控芯片，集成了无线充电接收电路、电机驱动系统、电磁检测模块等多个子系统，实现了高效的能量传输和精确的运动控制。
             </p>
-        </div>
-
-        <!-- 技术特色 -->
-        <div class="content-section">
-            <h2 class="section-title">技术特色</h2>
-            <div class="feature-list">
-                <span class="feature-item">
-                    <strong>智能充电定位：</strong>车模能够自主检测赛道中随机布置的150kHz无线充电发射装置，通过电磁信号导航精确停靠在充电位置。
-                </span>
-                <span class="feature-item">
-                    <strong>高效无线充电：</strong>基于LCC谐振变换技术，实现与赛道线圈的高效谐振耦合，2F储能电容从0V充至12V仅需5秒。
-                </span>
-                <span class="feature-item">
-                    <strong>集成化硬件设计：</strong>基于英飞凌TC264芯片自主设计主控电路、无线充电电路、电机驱动电路、电磁检测电路等完整硬件模块。
-                </span>
-                <span class="feature-item">
-                    <strong>高效电机驱动：</strong>采用IR2104半桥驱动MOS管方案，直接由无线充电的2F储能电容供电，实现高效的电机控制。
-                </span>
-                <span class="feature-item">
-                    <strong>实时能量管理：</strong>智能监控储能电容电压状态，自主规划充电策略，确保赛道行驶过程中的能量平衡。
-                </span>
-            </div>
         </div>
 
         <!-- 技术架构 -->
@@ -560,11 +538,11 @@
             <div class="tech-details">
                 <div class="tech-item">
                     <h3>主控系统</h3>
-                    <p>采用英飞凌TC264高性能32位单片机，集成丰富的外设接口和强大的实时处理能力，负责整车的控制逻辑、路径规划、充电管理等核心功能。</p>
+                    <p>采用英飞凌TC264高性能32位单片机，集成丰富的外设接口和强大的实时处理能力，负责整车的控制逻辑、摄像头路径识别、充电管理等核心功能。</p>
                 </div>
                 <div class="tech-item">
                     <h3>无线充电模块</h3>
-                    <p>基于LCC谐振变换技术设计的无线电能传输系统，工作频率150kHz，通过磁耦合与赛道发射线圈实现高效能量传输，充电效率高。</p>
+                    <p>基于LCC谐振变换技术设计的无线电能传输系统，工作频率150kHz，通过磁耦合与赛道发射线圈实现高效能量传输，0V-12V充电时间最快5秒。</p>
                 </div>
                 <div class="tech-item">
                     <h3>电机驱动系统</h3>
@@ -671,44 +649,22 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 工作原理 -->
-        <div class="content-section">
-            <h2 class="section-title">工作原理</h2>
-            <div class="feature-list">
-                <span class="feature-item">
-                    <strong>信号检测：</strong>车载电磁检测模块持续扫描150kHz的充电信号，通过信号强度和相位信息判断充电装置的位置和距离。
-                </span>
-                <span class="feature-item">
-                    <strong>导航定位：</strong>基于电磁信号梯度，智能车调整行驶方向，精确导航至充电发射装置上方，确保最佳的耦合位置。
-                </span>
-                <span class="feature-item">
-                    <strong>自动停靠：</strong>当检测到最强信号时，车辆自动停止并进入充电模式，接收线圈与发射线圈实现最佳耦合。
-                </span>
-                <span class="feature-item">
-                    <strong>能量传输：</strong>通过LCC谐振电路，高效接收150kHz交流电能，经过整流滤波后向2F储能电容充电。
-                </span>
-                <span class="feature-item">
-                    <strong>状态监控：</strong>实时监控电容电压，当达到设定阈值时自动结束充电，继续执行后续任务。
-                </span>
-            </div>
-        </div>
 
         <!-- 项目成果 -->
         <div class="content-section">
             <h2 class="section-title">项目成果</h2>
             <div class="feature-list">
                 <span class="feature-item">
-                    <strong>技术创新：</strong>成功实现了车载无线充电系统的完整解决方案，充电效率高，定位精确。
+                    <strong>技术创新：</strong>成功自主实现了比赛要求的车载无线充电系统的完整解决方案，充电效率高，定位精确。
                 </span>
                 <span class="feature-item">
-                    <strong>性能优异：</strong>储能电容从0V充电至12V仅需5秒，能够满足竞赛的快速充电要求。
+                    <strong>性能优异：</strong>储能电容从0V充电至12V仅需5秒，能够满足竞赛的快速充电要求；摄像头路径识别加电机差速控制实现赛道中的精准运行。
                 </span>
                 <span class="feature-item">
-                    <strong>系统集成：</strong>多个子系统完美协调工作，实现了从检测、导航、停靠到充电的全自动化流程。
+                    <strong>系统集成：</strong>多个子系统完美协调工作，实现了从识别、检测、导航、停靠到充电的全自动化流程。
                 </span>
                 <span class="feature-item">
-                    <strong>竞赛表现：</strong>在全国大学生智能汽车竞赛中表现优异，验证了技术方案的可行性和先进性。
+                    <strong>竞赛表现：</strong>在全国大学生智能汽车竞赛中表现优异，得到安徽省赛区一等奖以及全国总决赛一等奖，验证了技术方案的可行性和先进性。
                 </span>
             </div>
         </div>
