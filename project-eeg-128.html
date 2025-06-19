@@ -157,7 +157,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
-            background: white;
         }
 
         .image-item:hover {
@@ -193,8 +192,8 @@
             transform: translateY(0);
         }
 
-        /* 占位图片样式 - 现在作为预览图 */
-        .preview-image {
+        /* 占位图片样式 */
+        .placeholder-image {
             width: 100%;
             height: 250px;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -206,32 +205,6 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .preview-image:hover {
-            background: linear-gradient(135deg, #5a6fd8, #6a4198);
-        }
-
-        .preview-content {
-            text-align: center;
-        }
-
-        .preview-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .preview-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .preview-subtitle {
-            font-size: 0.8em;
-            opacity: 0.9;
-            margin-top: 8px;
         }
 
         /* 技术详情 */
@@ -438,13 +411,6 @@
             border-radius: 10px;
         }
 
-        .modal-content .preview-image {
-            border-radius: 10px;
-            max-width: 600px;
-            max-height: 500px;
-            margin: 0 auto;
-        }
-
         .close {
             position: absolute;
             top: 15px;
@@ -548,59 +514,74 @@
         <div class="content-section">
             <h2 class="section-title">项目展示</h2>
             <div class="image-gallery">
-                <div class="image-item" onclick="openModal(this)">
-                    <div class="preview-image">
-                        <div class="preview-content">
-                            <span class="preview-icon">🧠</span>
-                            <div class="preview-title">128通道脑电系统</div>
-                            <div class="preview-subtitle">完整的脑电采集设备</div>
+                <div class="image-item" onclick="openModal('images/eeg-device.jpg')">
+                    <img src="images/eeg-device.jpg" alt="128通道脑电系统" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-image" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">🧠</div>
+                            <div>128通道脑电系统</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整的脑电采集设备</div>
                         </div>
                     </div>
-                    <div class="image-caption">点击查看大图</div>
+                    <div class="image-caption">
+                        完整的脑电采集设备
+                    </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal(this)">
-                    <div class="preview-image">
-                        <div class="preview-content">
-                            <span class="preview-icon">🔧</span>
-                            <div class="preview-title">主控制板</div>
-                            <div class="preview-subtitle">ZYNQ FPGA核心处理板</div>
+                <div class="image-item" onclick="openModal('images/128-eeg-board.png')">
+                    <img src="images/128-eeg-board.png" alt="主控制板" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-image" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">🔧</div>
+                            <div>主控制板</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">ZYNQ FPGA核心处理板</div>
                         </div>
                     </div>
-                    <div class="image-caption">点击查看大图</div>
+                    <div class="image-caption">
+                        ZYNQ FPGA核心处理板
+                    </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal(this)">
-                    <div class="preview-image">
-                        <div class="preview-content">
-                            <span class="preview-icon">📡</span>
-                            <div class="preview-title">脑电硬件</div>
-                            <div class="preview-subtitle">16片ADC集成板</div>
+                <div class="image-item" onclick="openModal('images/eeg-hardware.png')">
+                    <img src="images/eeg-hardware.png" alt="脑电硬件" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-image" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">📡</div>
+                            <div>脑电硬件</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">16片ADC集成板</div>
                         </div>
                     </div>
-                    <div class="image-caption">点击查看大图</div>
+                    <div class="image-caption">
+                        16片ADC集成板
+                    </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal(this)">
-                    <div class="preview-image">
-                        <div class="preview-content">
-                            <span class="preview-icon">🔌</span>
-                            <div class="preview-title">典型信号</div>
-                            <div class="preview-subtitle">典型脑电信号</div>
+                <div class="image-item" onclick="openModal('images/eeg-signal.png')">
+                    <img src="images/eeg-signal.png" alt="典型信号" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-image" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">🔌</div>
+                            <div>典型信号</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">典型脑电信号</div>
                         </div>
                     </div>
-                    <div class="image-caption">点击查看大图</div>
+                    <div class="image-caption">
+                        典型脑电信号
+                    </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal(this)">
-                    <div class="preview-image">
-                        <div class="preview-content">
-                            <span class="preview-icon">📊</span>
-                            <div class="preview-title">数据可视化界面</div>
-                            <div class="preview-subtitle">实时脑电信号显示</div>
+                <div class="image-item" onclick="openModal('images/eeg-visualization.png')">
+                    <img src="images/eeg-visualization.png" alt="数据可视化界面" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder-image" style="display: none;">
+                        <div>
+                            <div style="font-size: 3em; margin-bottom: 10px;">📊</div>
+                            <div>数据可视化界面</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">实时脑电信号显示</div>
                         </div>
                     </div>
-                    <div class="image-caption">点击查看大图</div>
+                    <div class="image-caption">
+                        实时脑电信号显示
+                    </div>
                 </div>
             </div>
         </div>
@@ -669,25 +650,18 @@
     <!-- 图片模态框 -->
     <div id="imageModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content" id="modalContent">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
         </div>
     </div>
 
     <script>
-        // 图片模态框功能 - 修改为显示放大的预览图
-        function openModal(element) {
+        // 图片模态框功能
+        function openModal(imageSrc) {
             const modal = document.getElementById('imageModal');
-            const modalContent = document.getElementById('modalContent');
-            
-            // 复制原始预览内容到模态框中
-            const previewImage = element.querySelector('.preview-image');
-            const clonedPreview = previewImage.cloneNode(true);
-            
-            // 清空模态框内容并添加放大的预览
-            modalContent.innerHTML = '';
-            modalContent.appendChild(clonedPreview);
-            
+            const modalImg = document.getElementById('modalImage');
             modal.style.display = 'block';
+            modalImg.src = imageSrc;
         }
 
         // 关闭模态框
