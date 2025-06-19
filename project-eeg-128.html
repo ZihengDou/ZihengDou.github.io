@@ -510,34 +510,11 @@
             </div>
         </div>
 
-        <!-- 技术架构 */
-        <div class="content-section">
-            <h2 class="section-title">系统架构</h2>
-            <div class="tech-details">
-                <div class="tech-item">
-                    <h3>数据采集层</h3>
-                    <p>采用16片ADS1299专业级脑电ADC芯片，每片支持8通道24位高精度采集，内置可编程增益放大器和数字滤波器，为微弱脑电信号提供最佳的信号调理。</p>
-                </div>
-                <div class="tech-item">
-                    <h3>处理控制层</h3>
-                    <p>基于Xilinx ZYNQ XC7Z020异构处理器，ARM Cortex-A9负责系统控制和通信管理，FPGA负责实时数据采集、预处理和传输控制。</p>
-                </div>
-                <div class="tech-item">
-                    <h3>通信接口层</h3>
-                    <p>实现多路SPI总线的并行控制，统一管理16片ADS1299的配置、同步和数据读取，确保128通道数据的时序一致性和完整性。</p>
-                </div>
-                <div class="tech-item">
-                    <h3>数据传输层</h3>
-                    <p>通过千兆以太网接口实现高速数据传输，支持实时数据流和离线数据存储，配合上位机软件实现数据可视化和分析。</p>
-                </div>
-            </div>
-        </div>
-
         <!-- 图片展示 -->
         <div class="content-section">
             <h2 class="section-title">项目展示</h2>
             <div class="image-gallery">
-                <div class="image-item" onclick="openModal('images/eeg-128-overview.jpg')">
+                <div class="image-item" onclick="openModal('images/eeg-device.jpg')">
                     <div class="placeholder-image">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🧠</div>
@@ -547,7 +524,7 @@
                     </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/eeg-main-board.jpg')">
+                <div class="image-item" onclick="openModal('images/128-eeg-board.jpg')">
                     <div class="placeholder-image">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🔧</div>
@@ -557,37 +534,28 @@
                     </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/ads1299-array.jpg')">
+                <div class="image-item" onclick="openModal('images/eeg-hardware.jpg')">
                     <div class="placeholder-image">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">📡</div>
-                            <div>ADS1299芯片阵列</div>
+                            <div>脑电硬件</div>
                             <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">16片ADC集成板</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/power-management.jpg')">
-                    <div class="placeholder-image">
-                        <div>
-                            <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
-                            <div>电源管理模块</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">多级低噪声电源设计</div>
-                        </div>
-                    </div>
-                </div>
                 
-                <div class="image-item" onclick="openModal('images/eeg-cap-connection.jpg')">
+                <div class="image-item" onclick="openModal('images/eeg-signal.jpg')">
                     <div class="placeholder-image">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🔌</div>
-                            <div>脑电帽接口</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">128通道电极连接器</div>
+                            <div>典型信号</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">典型脑电信号</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="image-item" onclick="openModal('images/data-visualization.jpg')">
+                <div class="image-item" onclick="openModal('images/eeg-visualization.jpg')">
                     <div class="placeholder-image">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">📊</div>
