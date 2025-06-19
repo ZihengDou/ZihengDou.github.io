@@ -461,7 +461,7 @@
         <div class="content-section">
             <h2 class="section-title">项目概览</h2>
             <p class="project-overview">
-                本项目开发了一套基于ADS1299芯片的128通道高密度脑电采集系统，实现了对人脑电活动的高精度、高密度同步采集。系统采用ZYNQ FPGA作为核心处理平台，集成16片ADS1299模数转换器，通过精心设计的模拟前端电路和数字信号处理架构，实现了8kHz采样率下的128通道并行数据采集。该系统在电路集成度、噪声控制、数据传输等方面均达到了研究级别的技术指标，为神经科学研究和脑机接口应用提供了强有力的硬件平台。
+                本项目开发了一套基于ADS1299芯片的128通道高密度脑电采集系统，实现了对人脑电活动的高精度、高密度同步采集。系统采用ZYNQ FPGA作为核心处理平台，集成16片ADS1299模数转换器，通过精心设计的模拟前端电路和数字信号处理架构，EEG信号精度达到1μV,实现了8kHz采样率下的高精度128通道并行数据采集。该系统在电路集成度、噪声控制、数据传输等方面均达到了研究级别的技术指标，为神经科学研究和脑机接口应用提供了强有力的硬件平台。
             </p>
         </div>
 
@@ -499,13 +499,16 @@
                     <strong>并行通信架构：</strong>在Xilinx ZYNQ FPGA平台上实现16片ADS1299的SPI总线并行通信，确保所有通道的同步采集和数据完整性。
                 </span>
                 <span class="feature-item">
-                    <strong>高速数据传输：</strong>利用PS端控制千兆以太网接口，实现128通道×8kHz高密度脑电数据的实时传输，满足大数据量处理需求。
+                    <strong>高速数据传输：</strong>利用PS端控制千兆以太网接口，实现128通道×16kHz高密度脑电数据的实时传输，满足大数据量处理需求。
                 </span>
                 <span class="feature-item">
-                    <strong>优化电源设计：</strong>精心设计多级电源管理电路，为128通道模拟前端提供低噪声、高稳定性的供电，确保信号质量。
+                    <strong>实时数据处理：</strong>在FPGA中实现数据缓存、格式转换和传输控制，支持连续不间断的实时数据流处理。
                 </span>
                 <span class="feature-item">
-                    <strong>噪声抑制技术：</strong>通过精密的PCB布局、屏蔽设计和接地策略，有效抑制共模干扰和串扰，提升信噪比。
+                    <strong>优化电源设计：</strong>设计多级LDO低噪声电源，为128通道模拟前端提供低噪声、高稳定性的供电，确保生理信号质量。
+                </span>
+                <span class="feature-item">
+                    <strong>高精度EEG信号采集：</strong>通过合理的PCB布局、屏蔽设计和接地策略，有效抑制共模干扰和串扰，提升信号精度与信噪比。
                 </span>
             </div>
         </div>
@@ -520,11 +523,11 @@
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🧠</div>
                             <div>128通道脑电系统</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整的脑电采集设备</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">完整脑电采集设备</div>
                         </div>
                     </div>
                     <div class="image-caption">
-                        完整的脑电采集设备
+                        完整脑电采集设备
                     </div>
                 </div>
                 
@@ -533,12 +536,12 @@
                     <div class="placeholder-image" style="display: none;">
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">🔧</div>
-                            <div>主控制板</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">ZYNQ FPGA核心处理板</div>
+                            <div>128通道集成化脑电采集板</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">128通道集成化脑电采集板</div>
                         </div>
                     </div>
                     <div class="image-caption">
-                        ZYNQ FPGA核心处理板
+                        128通道集成化脑电采集板
                     </div>
                 </div>
                 
@@ -548,11 +551,11 @@
                         <div>
                             <div style="font-size: 3em; margin-bottom: 10px;">📡</div>
                             <div>脑电硬件</div>
-                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">16片ADC集成板</div>
+                            <div style="font-size: 0.8em; margin-top: 8px; opacity: 0.9;">脑电硬件</div>
                         </div>
                     </div>
                     <div class="image-caption">
-                        16片ADC集成板
+                        脑电硬件
                     </div>
                 </div>
                 
@@ -586,47 +589,6 @@
             </div>
         </div>
 
-        <!-- 核心技术 -->
-        <div class="content-section">
-            <h2 class="section-title">核心技术</h2>
-            <div class="feature-list">
-                <span class="feature-item">
-                    <strong>同步采集技术：</strong>通过精确的时钟分配和触发控制，确保16片ADS1299芯片的128个通道实现严格的同步采集，时间误差控制在微秒级别。
-                </span>
-                <span class="feature-item">
-                    <strong>SPI总线优化：</strong>设计高效的SPI通信协议和数据读取策略，在保证数据完整性的前提下，最大化数据传输效率。
-                </span>
-                <span class="feature-item">
-                    <strong>信号完整性设计：</strong>采用差分走线、阻抗匹配、层叠设计等技术，确保高速数字信号和微弱模拟信号的完整性。
-                </span>
-                <span class="feature-item">
-                    <strong>实时数据处理：</strong>在FPGA中实现数据缓存、格式转换和传输控制，支持连续不间断的实时数据流处理。
-                </span>
-                <span class="feature-item">
-                    <strong>模块化设计：</strong>采用模块化的硬件架构，便于系统维护、功能扩展和性能优化。
-                </span>
-            </div>
-        </div>
-
-        <!-- 技术挑战与解决方案 -->
-        <div class="content-section">
-            <h2 class="section-title">技术挑战与解决方案</h2>
-            <div class="feature-list">
-                <span class="feature-item">
-                    <strong>多通道同步难题：</strong>通过统一时钟分配和精确的触发时序设计，解决了128通道的同步采集问题，确保所有通道数据的时间一致性。
-                </span>
-                <span class="feature-item">
-                    <strong>高密度布线挑战：</strong>采用高密度多层PCB设计，优化信号走线和电源分配，在有限空间内实现了复杂的互连。
-                </span>
-                <span class="feature-item">
-                    <strong>噪声干扰控制：</strong>通过合理的电源分配、接地设计和屏蔽措施，有效降低了系统噪声，提升了信号质量。
-                </span>
-                <span class="feature-item">
-                    <strong>大数据量传输：</strong>优化了数据传输协议和缓存机制，确保128通道×8kHz的大数据量能够稳定、实时地传输。
-                </span>
-            </div>
-        </div>
-
         <!-- 项目成果 -->
         <div class="content-section">
             <h2 class="section-title">项目成果</h2>
@@ -638,10 +600,10 @@
                     <strong>系统集成：</strong>完成了从模拟前端到数字处理的完整信号链设计，实现了高度集成化的脑电采集平台。
                 </span>
                 <span class="feature-item">
-                    <strong>应用验证：</strong>系统已成功应用于脑电实验，能够稳定采集高质量的脑电信号，为神经科学研究提供可靠的数据支持。
+                    <strong>应用验证：</strong>系统已成功应用于脑电实验，能够稳定采集高质量的脑电信号，开发出基于ssvep的线上视觉诱发打字系统，为神经科学研究提供可靠的数据支持。
                 </span>
                 <span class="feature-item">
-                    <strong>技术价值：</strong>为脑机接口、神经疾病诊断、认知科学研究等领域提供了强有力的技术平台。
+                    <strong>专利申请：</strong>第二发明人 发明专利 脑电电极、脑电锁相采集模块、脑电采集系统及方法，公开号：CN120000158A
                 </span>
             </div>
         </div>
