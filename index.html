@@ -294,7 +294,7 @@
         <section class="section">
             <h2>自我描述</h2>
             <p class="about-text">
-                专注于创建高效可靠的硬件解决方案。拥有丰富的电路设计和嵌入式系统开发经验，精通模拟电路、数字电路设计以及PCB布局。我相信优秀的硬件产品来自于对技术细节的精益求精和对用户需求的深度理解。除了技术能力，我还具备良好的团队协作精神和问题解决能力，能够在快节奏的环境中高效工作。
+                拥有丰富的电路设计和嵌入式系统开发经验，精通模拟电路、数字电路设计以及PCB布局。我相信优秀的硬件产品来自于对技术细节的精益求精和对用户需求的深度理解。除了技术能力，我还具备良好的团队协作精神和问题解决能力，能够在快节奏的环境中高效工作。
             </p>
         </section>
 
@@ -324,28 +324,29 @@
             <h2>项目经验</h2>
             <div class="projects-list">
                 <div class="project-card">
-                    <h3 class="project-title">TD-fNIRS瞬态超快单光子计数设备</h3>
-                    <p class="project-subtitle">基于dToF的时域近红外光学脑成像系统（台深创（深圳）科技投资公司投资60万创业项目）</p>
+                    <h3 class="project-title">基于dToF的时域近红外光学脑成像系统</h3>
+                    <p class="project-subtitle">瞬态时域功能性近红外脑成像（TD-fNIR）系统（台深创（深圳）科技投资公司投资60万创业项目）</p>
                     <div class="highlight-list">
                         <span class="highlight-item">设计瞬态脑成像方案，利用皮秒脉冲近红外光在脑组织内受神经血管耦合作用产生的时域扩散现象，表征大脑皮层神经活动</span>
                         <span class="highlight-item">根据阶跃恢复二极管（SRD）的高速开关特性设计皮秒脉冲电路，实现了瞬态近红外脉冲光源，脉宽（FWHM）<150ps</span>
                         <span class="highlight-item">使用LMH3401差分放大器和MAX40026高速比较器，实现超快（边沿<350ps) SiPM信号读出电路，相位抖动<100ps</span>
                         <span class="highlight-item">基于TDC-GPX2型时间-数字转换器（TDC）设计的时域近红外脑成像（TD-fNIRS）系统，仪器响应函数（IRF）宽度<50ps，领先国际TD-fNIRS设备</span>
                         <span class="highlight-item">使用 ZYNQ XC7Z020型号FPGA核心板搭建SOC，设计TCSPC信号传输IP核以及DDR3高速信号传输逻辑</span>
-                        <span class="highlight-item">研发出12通道的时域fNIRS测量系统，单通道2亿采样点/s实时测量光子飞行时间</span>
+                        <span class="highlight-item">基于超快皮秒脉冲与SiPM、时间相关单光子计数（TCSPC）研发出12通道的时域fNIRS测量系统，单通道2亿采样点/s实时测量光子飞行时间</span>
                     </div>
                     <div class="project-tags">
                         <span class="tag">皮秒脉冲</span>
                         <span class="tag">近红外dToF</span>
                         <span class="tag">高速电路</span>
                         <span class="tag">FPGA开发</span>
+                        <span class="tag">时间相关单光子计数（TCSPC）技术</span>
                     </div>
                     <a href="project-td-fnirs.html" class="btn">查看项目</a>
                 </div>
 
                 <div class="project-card">
-                    <h3 class="project-title">智能汽车无线充电系统</h3>
-                    <p class="project-subtitle">全国大学生智能汽车竞赛 - 无线充电组</p>
+                    <h3 class="project-title">全国大学生智能汽车竞赛</h3>
+                    <p class="project-subtitle">第十七届全国大学生智能汽车竞赛 - 无线充电组</p>
                     <div class="highlight-list">
                         <span class="highlight-item">车模接收赛道中发射装置发出的150kHz交流信号，通过接收与转换电路转换为电压储存在法拉电容内，行驶过程中需检测并自动停在随机布置在赛道上的发射装置上获取电能</span>
                         <span class="highlight-item">基于英飞凌TC264芯片自主设计主控电路、无线充电电路、电机驱动电路、电磁检测电路等硬件模块</span>
@@ -363,11 +364,11 @@
 
                 <div class="project-card">
                     <h3 class="project-title">128通道高速脑电采集设备</h3>
-                    <p class="project-subtitle">非接触式多通道脑电采集系统</p>
+                    <p class="project-subtitle">非接触式多通道高速脑电采集系统</p>
                     <div class="highlight-list">
                         <span class="highlight-item">设计了一种基于ADS1299的多通道脑电采集系统，将AC7021B核心板与16块ADS1299集成定制一体化设计，可实现对脑电帽128通道的EEG信号采集</span>
                         <span class="highlight-item">在Xilinx ZYNQ FPGA 平台通过SPI 总线接口完成16片ADS1299的并行通信，包括通道控制与数据传输</span>
-                        <span class="highlight-item">使用PS端控制千兆以太网口进行数据传输，完成对脑电信号的128通道、8kHz高密度高速采样，并在上位机进行数据可视化</span>
+                        <span class="highlight-item">使用PS端控制千兆以太网口进行数据传输，完成对脑电信号的128通道、16kHz高密度高速采样，并在上位机进行数据可视化</span>
                     </div>
                     <div class="project-tags">
                         <span class="tag">电源设计</span>
